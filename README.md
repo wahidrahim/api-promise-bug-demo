@@ -12,3 +12,4 @@ yarn start
 
 2. refresh the page and notice the focused text-input blinking cursor become frozen while the `ApiProimse` is connecting. During this time buttons are not clickable either.
 
+Here you can see a deployed instance (production build) of the issue: https://quirky-lichterman-78b083.netlify.app
