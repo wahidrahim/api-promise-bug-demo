@@ -27,6 +27,12 @@ function App() {
       <input type="text" autoFocus ref={textInput} />
       <button>test</button>
       <div>{connectionStatus}</div>
+      <p style={{ width: '720px' }}>
+        Notice the focused text-input; the blinking cursor become frozen while
+        the ApiProimse is connecting. During this time buttons are not clickable
+        either.
+      </p>
+      <p>Refresh this page if necessary.</p>
     </div>
   );
 }
