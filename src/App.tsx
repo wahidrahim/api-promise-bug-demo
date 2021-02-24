@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ApiPromise, WsProvider } from '@polkadot/api';
+import { useEffect, useRef, useState } from 'react';
+import schema from './schema';
 
 function App() {
+  const [connectionStatus, setConnectionStatus] = useState('');
+  const textInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (textInput.current) textInput.current.focus();
+
+    const { types, rpc } = schema;
+
+    setConnectionStatus('ApiPromise is connecting...');
+
+    ApiPromise.create({
+      provider: new WsProvider('wss://pme.polymath.network'),
+      types,
+      rpc,
+    }).then(() => {
+      setConnectionStatus('ApiPromise is connected.');
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="text" autoFocus ref={textInput} />
+      <button>test</button>
+      <div>{connectionStatus}</div>
     </div>
   );
 }
